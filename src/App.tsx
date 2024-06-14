@@ -22,18 +22,25 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { authProvider } from "./authProvider";
 import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
+
 import {
-  BlogPostCreate,
-  BlogPostEdit,
-  BlogPostList,
-  BlogPostShow,
-} from "./pages/blog-posts";
+  FilmCreate,
+  FilmEdit,
+  FilmShow,
+  FilmList,
+} from "./pages/Film";
 import {
-  CategoryCreate,
-  CategoryEdit,
-  CategoryList,
-  CategoryShow,
-} from "./pages/categories";
+  SceneCreate,
+  SceneEdit,
+  SceneList,
+  SceneShow,
+} from "./pages/Scene";
+import {
+  CharacterCreate,
+  CharacterEdit,
+  CharacterList,
+  CharacterShow,
+} from "./pages/Characters";
 import { ForgotPassword } from "./pages/forgotPassword";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
@@ -47,27 +54,37 @@ function App() {
           <AntdApp>
             <DevtoolsProvider>
               <Refine
-                dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
+                dataProvider={dataProvider("http://localhost:8081")}
                 notificationProvider={useNotificationProvider}
                 routerProvider={routerBindings}
                 authProvider={authProvider}
                 resources={[
                   {
-                    name: "blog_posts",
-                    list: "/blog-posts",
-                    create: "/blog-posts/create",
-                    edit: "/blog-posts/edit/:id",
-                    show: "/blog-posts/show/:id",
+                    name: "films",
+                    list: "/films",
+                    create: "/films/create",
+                    edit: "/films/edit/:id",
+                    show: "/films/show/:id",
                     meta: {
                       canDelete: true,
                     },
                   },
                   {
-                    name: "categories",
-                    list: "/categories",
-                    create: "/categories/create",
-                    edit: "/categories/edit/:id",
-                    show: "/categories/show/:id",
+                    name: "characters",
+                    list: "/characters",
+                    create: "/characters/create",
+                    edit: "/characters/edit/:id",
+                    show: "/characters/show/:id",
+                    meta: {
+                      canDelete: true,
+                    },
+                  },
+                  {
+                    name: "scenes",
+                    list: "/scenes",
+                    create: "/scenes/create",
+                    edit: "/scenes/edit/:id",
+                    show: "/scenes/show/:id",
                     meta: {
                       canDelete: true,
                     },
@@ -77,7 +94,7 @@ function App() {
                   syncWithLocation: true,
                   warnWhenUnsavedChanges: true,
                   useNewQueryKeys: true,
-                  projectId: "oDI9qF-ai5Nzz-wGGbFR",
+                  projectId: "1loQKc-SieSpZ-xi00Jp",
                 }}
               >
                 <Routes>
@@ -98,19 +115,25 @@ function App() {
                   >
                     <Route
                       index
-                      element={<NavigateToResource resource="blog_posts" />}
+                      element={<NavigateToResource resource="films" />}
                     />
-                    <Route path="/blog-posts">
-                      <Route index element={<BlogPostList />} />
-                      <Route path="create" element={<BlogPostCreate />} />
-                      <Route path="edit/:id" element={<BlogPostEdit />} />
-                      <Route path="show/:id" element={<BlogPostShow />} />
+                    <Route path="/films">
+                      <Route index element={<FilmList />} />
+                      <Route path="create" element={<FilmCreate />} />
+                      <Route path="edit/:id" element={<FilmEdit />} />
+                      <Route path="show/:id" element={<FilmShow />} />
                     </Route>
-                    <Route path="/categories">
-                      <Route index element={<CategoryList />} />
-                      <Route path="create" element={<CategoryCreate />} />
-                      <Route path="edit/:id" element={<CategoryEdit />} />
-                      <Route path="show/:id" element={<CategoryShow />} />
+                    <Route path="/characters">
+                      <Route index element={<CharacterList />} />
+                      <Route path="create" element={<CharacterCreate />} />
+                      <Route path="edit/:id" element={<CharacterEdit />} />
+                      <Route path="show/:id" element={<CharacterShow />} />
+                    </Route>
+                    <Route path="/scenes">
+                      <Route index element={<SceneList />} />
+                      <Route path="create" element={<SceneCreate />} />
+                      <Route path="edit/:id" element={<SceneEdit />} />
+                      <Route path="show/:id" element={<SceneShow />} />
                     </Route>
                     <Route path="*" element={<ErrorComponent />} />
                   </Route>
